@@ -20,7 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+If variables stored in a `.env` file
+
+```ruby
+redcap = Redcap.new
+```
+
+otherwise, initialize Redcap like this:
+
+```ruby
+Redcap.configure do |config|
+  config.host = "http://yourhost.com"
+  config.token = 1234
+end
+
+redcap = Redcap.new
+```
+
+or like this
+
+```ruby
+redcap = Redcap.new host: 'http://yourhost.com', token: 1234
+```
+
 
 ## Development
 
