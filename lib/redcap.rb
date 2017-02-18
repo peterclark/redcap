@@ -59,6 +59,25 @@ module Redcap
       return unless @log
       @logger.debug message
     end
+
+    def records
+      response = post configuration.host,
+        token: configuration.token,
+        format: configuration.format,
+        content: :record
+      response.map { |record| Hashie::Mash.new record }
+    end
+
+    private
+
+    def post(url, payload = {})
+      log "Redcap POST to #{url} with #{payload}"
+      response = RestClient.post url, payload
+      response = JSON.parse(response)
+      log 'Response:'
+      log response
+      response
+    end
   end
 
 end
