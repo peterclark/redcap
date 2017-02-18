@@ -1,11 +1,12 @@
-
-require 'redcap/version'
-require 'redcap/configuration'
+require 'hashie'
 require 'json'
 require 'rest-client'
 require 'logger'
-require 'hashie'
 require 'dotenv'
+require 'redcap/version'
+require 'redcap/configuration'
+require 'redcap/record'
+
 Dotenv.load
 
 module Redcap
@@ -63,7 +64,7 @@ module Redcap
     def records fields: []
       payload = build_payload content: :record, fields: fields
       response = post configuration.host, payload
-      response.map { |record| Hashie::Mash.new record }
+      response.map { |record| Redcap::Record.new record }
     end
 
     private
