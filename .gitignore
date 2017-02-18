@@ -1,4 +1,5 @@
 .env
+.autotest
 
 /.yardoc/
 /_yardoc/

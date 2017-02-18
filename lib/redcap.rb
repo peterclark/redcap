@@ -67,23 +67,27 @@ module Redcap
       Redcap::Record.new response
     end
 
-    def records fields: []
-      payload = build_payload content: :record, fields: fields
+    def records records: [], fields: [], filter: nil
+      payload = build_payload content: :record, records: records, fields: fields, filter: filter
       response = post configuration.host, payload
       response.map { |record| Redcap::Record.new record }
     end
 
     private
 
-    def build_payload content: nil, fields: [], conditions: []
+    def build_payload content: nil, records: [], fields: [], filter: nil
       payload = {
         token: configuration.token,
         format: configuration.format,
         content: content
       }
+      records.each_with_index do |record, index|
+        payload["records[#{index}]"] = record
+      end if records
       fields.each_with_index do |field, index|
         payload["fields[#{index}]"] = field
-      end
+      end if fields
+      payload[:filterLogic] = filter if filter
       payload
     end
 

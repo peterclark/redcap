@@ -55,14 +55,20 @@ redcap = Redcap.new host: 'http://yourhost.com', token: 1234
 ```ruby
 redcap = Redcap.new
 
-# Retrieve all records and all fields
+# Get project info
+redcap.project
+
+# Get all records and all fields
 redcap.records
 
-# Retrieve only first_name and age fields for all records
+# Get all records and a subset of fields
 redcap.records fields: %w(first_name age)
 
-# Retrieve project info
-redcap.project
+# Get all records and all fields matching a filter
+redcap.records filter: '[age] > 40'
+
+# Get all records and a subset of fields matching a filter
+redcap.records fields: %w(email age), filter: '[age] < 35'
 
 ```
 
@@ -79,7 +85,7 @@ user.age
 # => 38
 ```
 
-##### Limiting fields with `.records`
+##### Limiting fields with `.records` using `fields`
 ```ruby
 redcap = Redcap.new
 records = redcap.records fields: %w(first_name age)
@@ -90,6 +96,32 @@ user.first_name
 # => 'Luke'
 user.age
 # => '18'
+```
+
+##### Limiting records with `.records` using `filter`
+```ruby
+redcap = Redcap.new
+records = redcap.records filter: '[age] > 55'
+user = records.first
+user.record_id
+# => 1
+user.first_name
+# => 'Obi'
+user.age
+# => '65'
+```
+
+##### Limiting records with `.records` using `records`
+```ruby
+redcap = Redcap.new
+records = redcap.records records: [1,2]
+user = records.first
+user.record_id
+# => 1
+user.first_name
+# => 'Leah'
+user.age
+# => '42'
 ```
 
 ##### Project Info with `.project`

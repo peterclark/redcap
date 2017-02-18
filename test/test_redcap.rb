@@ -25,4 +25,5 @@ class RedcapTest < Minitest::Test
   def test_that_format_defaults_to_json
     assert_equal @redcap.configuration.format, :json
   end
+  
 end
