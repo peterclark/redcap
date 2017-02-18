@@ -51,8 +51,22 @@ redcap = Redcap.new host: 'http://yourhost.com', token: 1234
 
 ## Usage
 
-##### Accessing records
+##### Summary of available methods
+```ruby
+redcap = Redcap.new
 
+# Retrieve all records and all fields
+redcap.records
+
+# Retrieve only first_name and age fields for all records
+redcap.records fields: %w(first_name age)
+
+# Retrieve project info
+redcap.project
+
+```
+
+##### Accessing records with `.records`
 ```ruby
 redcap = Redcap.new
 records = redcap.records
@@ -65,8 +79,7 @@ user.age
 # => 38
 ```
 
-##### Limiting fields
-
+##### Limiting fields with `.records`
 ```ruby
 redcap = Redcap.new
 records = redcap.records fields: %w(first_name age)
@@ -77,6 +90,16 @@ user.first_name
 # => 'Luke'
 user.age
 # => '18'
+```
+
+##### Project Info with `.project`
+```ruby
+redcap = Redcap.new
+project = redcap.project
+project.project_title
+# => 'People'
+project.creation_time
+# => '2017-02-17 06:02:54'
 ```
 
 

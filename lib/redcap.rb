@@ -61,6 +61,12 @@ module Redcap
       @logger.debug message
     end
 
+    def project
+      payload = build_payload content: :project
+      response = post configuration.host, payload
+      Redcap::Record.new response
+    end
+
     def records fields: []
       payload = build_payload content: :record, fields: fields
       response = post configuration.host, payload
