@@ -60,15 +60,25 @@ module Redcap
       @logger.debug message
     end
 
-    def records
-      response = post configuration.host,
-        token: configuration.token,
-        format: configuration.format,
-        content: :record
+    def records fields: []
+      payload = build_payload content: :record, fields: fields
+      response = post configuration.host, payload
       response.map { |record| Hashie::Mash.new record }
     end
 
     private
+
+    def build_payload content: nil, fields: [], conditions: []
+      payload = {
+        token: configuration.token,
+        format: configuration.format,
+        content: content
+      }
+      fields.each_with_index do |field, index|
+        payload["fields[#{index}]"] = field
+      end
+      payload
+    end
 
     def post(url, payload = {})
       log "Redcap POST to #{url} with #{payload}"

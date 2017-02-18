@@ -18,15 +18,21 @@ Or install it yourself as:
 
     $ gem install redcap
 
-## Usage
+## Initialization
 
-If variables stored in a `.env` file
+You can initialize a Redcap instance in one of three ways:
+
+##### Using a `.env` file
 
 ```ruby
+# inside .env file
+# REDCAP_HOST=http://yourhost.com
+# REDCAP_TOKEN=12345
+
 redcap = Redcap.new
 ```
 
-otherwise, initialize Redcap like this:
+##### Using a block
 
 ```ruby
 Redcap.configure do |config|
@@ -37,10 +43,40 @@ end
 redcap = Redcap.new
 ```
 
-or like this
+##### Passing in a hash of options
 
 ```ruby
 redcap = Redcap.new host: 'http://yourhost.com', token: 1234
+```
+
+## Usage
+
+##### Accessing records
+
+```ruby
+redcap = Redcap.new
+records = redcap.records
+user = records.first
+user.record_id
+# => 1
+user.first_name
+# => 'Darth'
+user.age
+# => 38
+```
+
+##### Limiting fields
+
+```ruby
+redcap = Redcap.new
+records = redcap.records fields: %w(first_name age)
+user = records.first
+user.record_id
+# => nil
+user.first_name
+# => 'Luke'
+user.age
+# => '18'
 ```
 
 
