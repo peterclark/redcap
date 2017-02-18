@@ -1,4 +1,4 @@
-# Redcap
+# Redcap [![Build Status](https://travis-ci.org/peterclark/redcap.svg?branch=master)](https://travis-ci.org/peterclark/redcap)
 
 A Ruby gem for interacting with the REDCap API
 
