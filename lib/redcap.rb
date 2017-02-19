@@ -63,14 +63,13 @@ module Redcap
 
     def project
       payload = build_payload content: :project
-      response = post configuration.host, payload
-      Redcap::Record.new response
+      post configuration.host, payload
     end
 
     def records records: [], fields: [], filter: nil
+      fields |= [:record_id ]if fields.any? # add :record_id to fields unless already there
       payload = build_payload content: :record, records: records, fields: fields, filter: filter
-      response = post configuration.host, payload
-      response.map { |record| Redcap::Record.new record }
+      post configuration.host, payload
     end
 
     def update data=[]
@@ -82,7 +81,7 @@ module Redcap
         type: :flat,
         data: data.to_json
       }
-      response = post configuration.host, payload
+      post configuration.host, payload
     end
 
     private

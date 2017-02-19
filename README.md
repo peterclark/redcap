@@ -51,6 +51,24 @@ redcap = Redcap.new host: 'http://yourhost.com', token: 1234
 
 ## Usage
 
+##### Option 1 - Create your own class
+```ruby
+class Person < Redcap::Record
+end
+
+# find a record by id
+bob = Person.find 1
+# find a record by a field value
+bob = Person.where(first_name: 'Bob').first
+# get all records
+people = Person.all
+# get first_name and age for all records
+people = Person.select(:first_name, :age)
+# update a record
+bob.last_name = 'Smith'
+bob.save
+```
+
 ##### Summary of available methods
 ```ruby
 redcap = Redcap.new
@@ -69,6 +87,18 @@ redcap.records filter: '[age] > 40'
 
 # Get all records and a subset of fields matching a filter
 redcap.records fields: %w(email age), filter: '[age] < 35'
+
+# or, if you prefer an ActiveRecord-like interface...
+
+Redcap::Record.find 1
+Redcap::Record.all
+Redcap::Record.select(:first_name, :age)
+Redcap::Record.where(first_name: 'Bob')
+
+# updating a record
+bob = Redcap::Record.find 1
+bob.last_name = 'Smith'
+bob.save
 
 ```
 
@@ -134,7 +164,12 @@ project.creation_time
 # => '2017-02-17 06:02:54'
 ```
 
+## TODO
 
+1. Method chaining
+  - `Person.where(age: 40).select(:first_name)`
+2. Create record
+  - `Person.create(first_name: 'Bo', ...)`
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
