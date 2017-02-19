@@ -73,6 +73,18 @@ module Redcap
       response.map { |record| Redcap::Record.new record }
     end
 
+    def update data=[]
+      payload = {
+        token: configuration.token,
+        format: configuration.format,
+        content: :record,
+        overwriteBehavior: :normal,
+        type: :flat,
+        data: data.to_json
+      }
+      response = post configuration.host, payload
+    end
+
     private
 
     def build_payload content: nil, records: [], fields: [], filter: nil
