@@ -63,13 +63,14 @@ module Redcap
 
     def project
       payload = build_payload content: :project
-      post configuration.host, payload
+      post payload
     end
 
     def records records: [], fields: [], filter: nil
-      fields |= [:record_id] if fields.any? # add :record_id to fields unless already there
+      # add :record_id if not included
+      fields |= [:record_id] if fields.any?
       payload = build_payload content: :record, records: records, fields: fields, filter: filter
-      post configuration.host, payload
+      post payload
     end
 
     def update data=[]
@@ -82,7 +83,7 @@ module Redcap
         returnContent: :count,
         data: data.to_json
       }
-      result = post configuration.host, payload
+      result = post payload
       result['count'] == 1
     end
 
@@ -96,7 +97,7 @@ module Redcap
         returnContent: :ids,
         data: data.to_json
       }
-      post configuration.host, payload
+      post payload
     end
 
     private
@@ -117,9 +118,9 @@ module Redcap
       payload
     end
 
-    def post(url, payload = {})
-      log "Redcap POST to #{url} with #{payload}"
-      response = RestClient.post url, payload
+    def post payload = {}
+      log "Redcap POST to #{configuration.host} with #{payload}"
+      response = RestClient.post configuration.host, payload
       response = JSON.parse(response)
       log 'Response:'
       log response

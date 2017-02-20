@@ -14,10 +14,6 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install redcap
-
 ## Initialization
 
 You can initialize a Redcap instance in one of three ways:
