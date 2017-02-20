@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["peter@5clarks.net"]
 
   spec.summary       = "A Ruby gem for interacting with the REDCap API"
-  spec.description   = "REDCap is a mature, secure web application for building and managing online surveys and databases. The REDCap ruby gem allows programmatic access to a REDCap installatino via the API using the ruby programming language."
+  spec.description   = "REDCap is a mature, secure web application for building and managing online surveys and databases. The redcap ruby gem allows programmatic access to a REDCap installation via the API using the ruby programming language."
   spec.homepage      = "https://github.com/peterclark/redcap"
   spec.license       = "MIT"
 

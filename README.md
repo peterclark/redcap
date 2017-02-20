@@ -7,7 +7,7 @@ A Ruby gem for interacting with the REDCap API
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'redcap', git: 'peterclark/redcap'
+gem 'redcap', git: 'https://github.com/peterclark/redcap.git'
 ```
 
 And then execute:
