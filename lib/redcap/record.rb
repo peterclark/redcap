@@ -32,9 +32,20 @@ module Redcap
     end
 
     def save
-      client = Redcap.new
-      data = Hash[keys.zip(values)]
-      client.update [data]
+      if record_id
+        data = Hash[keys.zip(values)]
+        client.update [data]
+      else
+        max_id = client.records(fields: %w(record_id)).map(&:values).flatten.map(&:to_i).max
+        self.record_id = max_id+1
+        data = Hash[keys.zip(values)]
+        result = client.create [data]
+        result.first == record_id.to_s
+      end
+    end
+
+    def client
+      self.class.client
     end
 
     private

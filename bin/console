@@ -10,5 +10,8 @@ require "redcap"
 # require "pry"
 # Pry.start
 
+class Person < Redcap::Record
+end
+
 require "irb"
 IRB.start

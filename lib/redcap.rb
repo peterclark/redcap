@@ -79,6 +79,21 @@ module Redcap
         content: :record,
         overwriteBehavior: :normal,
         type: :flat,
+        returnContent: :count,
+        data: data.to_json
+      }
+      result = post configuration.host, payload
+      result['count'] == 1
+    end
+
+    def create data=[]
+      payload = {
+        token: configuration.token,
+        format: configuration.format,
+        content: :record,
+        overwriteBehavior: :normal,
+        type: :flat,
+        returnContent: :ids,
         data: data.to_json
       }
       post configuration.host, payload

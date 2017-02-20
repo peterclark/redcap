@@ -51,25 +51,40 @@ redcap = Redcap.new host: 'http://yourhost.com', token: 1234
 
 ## Usage
 
-##### Option 1 - Create your own class
+##### Create a class that inherits from `Redcap::Record`
 ```ruby
 class Person < Redcap::Record
 end
+```
 
-# find a record by id
+###### Find a record by `record_id`
+```ruby
 bob = Person.find 1
-# find a record by a field value
+```
+
+###### Find a record by a field value
+```ruby
 bob = Person.where(first_name: 'Bob').first
-# get all records
+```
+
+###### Return all records
+```ruby
 people = Person.all
-# get first_name and age for all records
+```
+
+###### Return all records with only `first_name` and `age`
+```ruby
 people = Person.select(:first_name, :age)
-# update a record
+```
+
+###### Update a record
+```ruby
+bob = Person.where(first_name: 'bob').first
 bob.last_name = 'Smith'
 bob.save
 ```
 
-##### Summary of available methods
+###### Using the `Redcap` class to return raw data
 ```ruby
 redcap = Redcap.new
 
@@ -87,89 +102,15 @@ redcap.records filter: '[age] > 40'
 
 # Get all records and a subset of fields matching a filter
 redcap.records fields: %w(email age), filter: '[age] < 35'
-
-# or, if you prefer an ActiveRecord-like interface...
-
-Redcap::Record.find 1
-Redcap::Record.all
-Redcap::Record.select(:first_name, :age)
-Redcap::Record.where(first_name: 'Bob')
-
-# updating a record
-bob = Redcap::Record.find 1
-bob.last_name = 'Smith'
-bob.save
-
-```
-
-##### Accessing records with `.records`
-```ruby
-redcap = Redcap.new
-records = redcap.records
-user = records.first
-user.record_id
-# => 1
-user.first_name
-# => 'Darth'
-user.age
-# => 38
-```
-
-##### Limiting fields with `.records` using `fields`
-```ruby
-redcap = Redcap.new
-records = redcap.records fields: %w(first_name age)
-user = records.first
-user.record_id
-# => nil
-user.first_name
-# => 'Luke'
-user.age
-# => '18'
-```
-
-##### Limiting records with `.records` using `filter`
-```ruby
-redcap = Redcap.new
-records = redcap.records filter: '[age] > 55'
-user = records.first
-user.record_id
-# => 1
-user.first_name
-# => 'Obi'
-user.age
-# => '65'
-```
-
-##### Limiting records with `.records` using `records`
-```ruby
-redcap = Redcap.new
-records = redcap.records records: [1,2]
-user = records.first
-user.record_id
-# => 1
-user.first_name
-# => 'Leah'
-user.age
-# => '42'
-```
-
-##### Project Info with `.project`
-```ruby
-redcap = Redcap.new
-project = redcap.project
-project.project_title
-# => 'People'
-project.creation_time
-# => '2017-02-17 06:02:54'
 ```
 
 ## TODO
 
 1. Method chaining
   - `Person.where(age: 40).select(:first_name)`
-2. Create record
-  - `Person.create(first_name: 'Bo', ...)`
+2. Advanced filter log
+  - `Person.where(age.gt: 40)` # greater than
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
