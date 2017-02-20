@@ -84,6 +84,12 @@ bob.last_name = 'Smith'
 bob.save
 ```
 
+###### Create a record
+```ruby
+joe = Person.new(first_name: 'Joe', email: 'joe@google.com')
+joe.save
+```
+
 ###### Using the `Redcap` class to return raw data
 ```ruby
 redcap = Redcap.new
