@@ -67,7 +67,7 @@ module Redcap
     end
 
     def records records: [], fields: [], filter: nil
-      fields |= [:record_id ]if fields.any? # add :record_id to fields unless already there
+      fields |= [:record_id] if fields.any? # add :record_id to fields unless already there
       payload = build_payload content: :record, records: records, fields: fields, filter: filter
       post configuration.host, payload
     end

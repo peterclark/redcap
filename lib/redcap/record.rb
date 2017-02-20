@@ -5,6 +5,7 @@ module Redcap
     @@client = nil
 
     def self.find id
+      return unless id.is_a? Integer
       response = client.records records: [id]
       self.new response.first
     end
@@ -19,11 +20,21 @@ module Redcap
       response.map { |r| self.new r }
     end
 
+    def self.pluck field
+      return [] unless field
+      response = client.records fields: [field]
+      response.map { |r| r[field.to_s] }
+    end
+
     def self.where condition
       raise "where only accepts a Hash" unless condition.is_a? Hash
       raise "where only accepts a Hash with one key/value pair" unless condition.size == 1
       key, value = condition.first
-      response = client.records filter: "[#{key}] = '#{value}'"
+      response = if (key == :id)
+        client.records records: value
+      else
+        client.records filter: "[#{key}] = '#{value}'"
+      end
       response.map { |r| self.new r }
     end
 

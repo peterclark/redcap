@@ -62,6 +62,11 @@ end
 bob = Person.find 1
 ```
 
+###### Find records using an array of ids
+```ruby
+people = Person.where id: [1,4,5]
+```
+
 ###### Find a record by a field value
 ```ruby
 bob = Person.where(first_name: 'Bob').first
@@ -75,6 +80,12 @@ people = Person.all
 ###### Return all records with only `first_name` and `age`
 ```ruby
 people = Person.select(:first_name, :age)
+```
+
+###### Pluck a field from all records
+```ruby
+names = Person.pluck(:first_name)
+# ['Joe', 'Sal', 'Luke']
 ```
 
 ###### Update a record
@@ -108,13 +119,16 @@ redcap.records filter: '[age] > 40'
 
 # Get all records and a subset of fields matching a filter
 redcap.records fields: %w(email age), filter: '[age] < 35'
+
+# Get records with the given ids and a subset of fields matching a filter
+redcap.records records: [1,4], fields: %w(email age), filter: '[age] < 35'
 ```
 
 ## TODO
 
 1. Method chaining
   - `Person.where(age: 40).select(:first_name)`
-2. Advanced filter log
+2. Advanced filter logic
   - `Person.where(age.gt: 40)` # greater than
 
 ## Development
