@@ -97,6 +97,26 @@ joe = Person.new(first_name: 'Joe', email: 'joe@google.com')
 joe.save
 ```
 
+###### `>` Greater Than
+```ruby
+over40 = Person.gt age: 40
+```
+
+###### `<` Less Than
+```ruby
+under30 = Person.lt age: 30
+```
+
+###### `>=` Greater Than or Equal To
+```ruby
+over40 = Person.gte age: 41
+```
+
+###### `<=` Less Than or Equal To
+```ruby
+under30 = Person.lte age: 29
+```
+
 ###### Using the `Redcap` class to return raw data
 ```ruby
 redcap = Redcap.new

@@ -15,9 +15,12 @@ module Redcap
       response.map { |r| self.new r }
     end
 
-    def self.select *fields
-      response = client.records fields: fields
-      response.map { |r| self.new r }
+    def self.ids
+      client.records(fields: [:record_id]).map { |r| r['record_id'].to_i }
+    end
+
+    def self.count
+      ids.count
     end
 
     def self.pluck field
@@ -26,16 +29,44 @@ module Redcap
       response.map { |r| r[field.to_s] }
     end
 
-    def self.where condition
-      raise "where only accepts a Hash" unless condition.is_a? Hash
-      raise "where only accepts a Hash with one key/value pair" unless condition.size == 1
-      key, value = condition.first
-      response = if (key == :id)
-        client.records records: value
-      else
-        client.records filter: "[#{key}] = '#{value}'"
-      end
+    def self.find_or_create_by condition
+    end
+
+    def self.having condition
+    end
+
+    def self.group field
+    end
+
+    def self.order condition
+    end
+
+    def self.where_not condition
+    end
+
+    def self.select *fields
+      response = client.records fields: fields
       response.map { |r| self.new r }
+    end
+
+    def self.where condition
+      comparison condition, '='
+    end
+
+    def self.gt condition
+      comparison condition, '>'
+    end
+
+    def self.lt condition
+      comparison condition, '<'
+    end
+
+    def self.gte condition
+      comparison condition, '>='
+    end
+
+    def self.lte condition
+      comparison condition, '<='
     end
 
     def id
@@ -64,6 +95,24 @@ module Redcap
     def self.client
       @@client = Redcap.new unless @@client
       @@client
+    end
+
+    def self.comparison condition, op
+      raise "method only accepts a Hash" unless condition.is_a? Hash
+      raise "method only accepts a Hash with one key/value pair" unless condition.size == 1
+      key, val = condition.first
+      response = if(key == :id)
+        raise "method only accepts an Array of integers when searching by :id" unless val.is_a? Array
+        client.records records: val
+      elsif op == '='
+        client.records filter: "[#{key}] = '#{val}'"
+      elsif %w( > < >= <= ).include? op
+        raise "method only accepts an integer or float for the value" unless val.is_a?(Integer) || val.is_a?(Float)
+        response = client.records filter: "[#{key}] #{op} #{val}"
+      else
+        []
+      end
+      response.map { |r| self.new r }
     end
 
   end
