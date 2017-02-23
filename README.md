@@ -47,86 +47,88 @@ redcap = Redcap.new host: 'http://yourhost.com', token: 1234
 
 ## Usage
 
-##### Create a class that inherits from `Redcap::Record`
+##### Create a class that inherits from `Redcap::Record`.
 ```ruby
-class Person < Redcap::Record
+# name the class after your REDCap project
+# ex. Survey, Volunteer, Trial, People
+class People < Redcap::Record
 end
 ```
 
 ###### Find a record by `record_id`
 ```ruby
-bob = Person.find 1
+bob = People.find 1
 ```
 
 ###### Find records using an array of ids
 ```ruby
-people = Person.where id: [1,4,5]
+people = People.where id: [1,4,5]
 ```
 
 ###### Find a record by a field value
 ```ruby
-bob = Person.where(first_name: 'Bob').first
+bob = People.where(first_name: 'Bob').first
 ```
 
 ###### Return all records
 ```ruby
-people = Person.all
+people = People.all
 ```
 
 ###### Return all records with only `first_name` and `age`
 ```ruby
-people = Person.select(:first_name, :age)
+people = People.select(:first_name, :age)
 ```
 
 ###### Pluck a field from all records
 ```ruby
-names = Person.pluck(:first_name)
+names = People.pluck(:first_name)
 # ['Joe', 'Sal', 'Luke']
 ```
 
 ###### Return all record ids
 ```ruby
-ids = Person.ids
-# ['1', '2', '3', ...]
+ids = People.ids
+# [1,2,3, ... ]
 ```
 
 ###### Return the total number of records
 ```ruby
-total = Person.count
+total = People.count
 # 125
 ```
 
 ###### Update a record
 ```ruby
-bob = Person.where(first_name: 'bob').first
+bob = People.where(first_name: 'bob').first
 bob.last_name = 'Smith'
 bob.save
 ```
 
 ###### Create a record
 ```ruby
-joe = Person.new(first_name: 'Joe', email: 'joe@google.com')
+joe = People.new(first_name: 'Joe', email: 'joe@google.com')
 joe.save
 ```
 
 ###### `>` Greater Than
 ```ruby
-over40 = Person.gt age: 40
+over40 = People.gt age: 40
 ```
 
 ###### `<` Less Than
 ```ruby
-under30 = Person.lt age: 30
+under30 = People.lt age: 30
 ```
 
 ###### `>=` Greater Than or Equal To
 ```ruby
-over40 = Person.gte age: 41
+over40 = People.gte age: 41
 ```
 
 ###### `<=` Less Than or Equal To
 ```ruby
-under30 = Person.lte age: 29
+under30 = People.lte age: 29
 ```
 
 ###### Using the `Redcap` class to return raw data
@@ -155,9 +157,7 @@ redcap.records records: [1,4], fields: %w(email age), filter: '[age] < 35'
 ## TODO
 
 1. Method chaining
-  - `Person.where(age: 40).select(:first_name)`
-2. Advanced filter logic
-  - `Person.where(age.gt: 40)` # greater than
+  - `People.where(age: 40).select(:first_name)`
 
 ## Development
 
