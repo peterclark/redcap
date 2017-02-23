@@ -84,6 +84,18 @@ names = Person.pluck(:first_name)
 # ['Joe', 'Sal', 'Luke']
 ```
 
+###### Return all record ids
+```ruby
+ids = Person.ids
+# ['1', '2', '3', ...]
+```
+
+###### Return the total number of records
+```ruby
+total = Person.count
+# 125
+```
+
 ###### Update a record
 ```ruby
 bob = Person.where(first_name: 'bob').first
