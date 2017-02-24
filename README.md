@@ -131,6 +131,11 @@ over40 = People.gte age: 41
 under30 = People.lte age: 29
 ```
 
+###### Logging
+```ruby
+# set log to true on the client
+People.client.log = true
+```
 ###### Using the `Redcap` class to return raw data
 ```ruby
 redcap = Redcap.new
