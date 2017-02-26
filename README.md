@@ -136,6 +136,20 @@ under30 = People.lte age: 29
 # set log to true on the client
 People.client.log = true
 ```
+
+###### Enable Caching
+Setting `REDCAP_CACHE` to `ON` inside your `.env` file will cache all calls to Redcap. A full cache flush will occur when any record is updated or created.
+```ruby
+# inside .env
+# REDCAP_CACHE=ON
+```
+
+###### Force cache flush
+If `REDCAP_CACHE` is set to `ON`, the cache can be manually flushed by calling `flush_cache` on the client.
+```ruby
+People.client.flush_cache
+```
+
 ###### Using the `Redcap` class to return raw data
 ```ruby
 redcap = Redcap.new
@@ -166,7 +180,6 @@ redcap.records records: [1,4], fields: %w(email age), filter: '[age] < 35'
 2. Create `RedcapRecord` module as alternative to inheritance
   - `include Redcap`
 3. Destroy a record
-4. Implement caching.
 
 ## Development
 

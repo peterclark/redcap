@@ -3,6 +3,7 @@ require 'json'
 require 'rest-client'
 require 'logger'
 require 'dotenv'
+require 'memoist'
 require 'redcap/version'
 require 'redcap/configuration'
 require 'redcap/record'
@@ -41,6 +42,8 @@ module Redcap
   end
 
   class Client
+    extend Memoist
+
     attr_reader :logger
     attr_writer :log
 
@@ -83,6 +86,7 @@ module Redcap
         returnContent: :count,
         data: data.to_json
       }
+      log flush_cache if ENV['REDCAP_CACHE']=='ON'
       result = post payload
       result['count'] == 1
     end
@@ -97,6 +101,7 @@ module Redcap
         returnContent: :ids,
         data: data.to_json
       }
+      log flush_cache if ENV['REDCAP_CACHE']=='ON'
       post payload
     end
 
@@ -126,6 +131,8 @@ module Redcap
       log response
       response
     end
+    memoize(:post) if ENV['REDCAP_CACHE']=='ON'
+
   end
 
 end

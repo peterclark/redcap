@@ -33,7 +33,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dotenv'
   spec.add_dependency 'rest-client'
   spec.add_dependency 'json'
-  spec.add_dependency 'hashie'
+  spec.add_dependency 'hashie', "~> 3.4.6"
+  spec.add_dependency 'memoist'
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
