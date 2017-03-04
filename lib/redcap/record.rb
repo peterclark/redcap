@@ -79,7 +79,7 @@ module Redcap
         client.update [data]
       else
         max_id = client.records(fields: %w(record_id)).map(&:values).flatten.map(&:to_i).max
-        self.record_id = max_id+1
+        self.record_id = max_id.to_i + 1
         data = Hash[keys.zip(values)]
         result = client.create [data]
         result.first == record_id.to_s
