@@ -180,6 +180,7 @@ redcap.records records: [1,4], fields: %w(email age), filter: '[age] < 35'
 2. Create `RedcapRecord` module as alternative to inheritance
   - `include Redcap`
 3. Destroy a record
+4. `.metadata` method
 
 ## Development
 

@@ -7,6 +7,7 @@ require 'memoist'
 require 'redcap/version'
 require 'redcap/configuration'
 require 'redcap/record'
+require 'redcapable'
 
 Dotenv.load
 
@@ -69,6 +70,10 @@ module Redcap
       post payload
     end
 
+    def max_id
+      records(fields: %w(record_id)).map(&:values).flatten.map(&:to_i).max
+    end
+
     def records records: [], fields: [], filter: nil
       # add :record_id if not included
       fields |= [:record_id] if fields.any?
@@ -103,6 +108,20 @@ module Redcap
       }
       log flush_cache if ENV['REDCAP_CACHE']=='ON'
       post payload
+    end
+
+    def metadata
+      payload = {
+        token: configuration.token,
+        format: configuration.format,
+        content: :metadata,
+        fields: []
+      }
+      post payload
+    end
+
+    def fields
+      metadata.map { |m| m['field_name'].to_sym unless m['field_type'] == 'descriptive' }.compact
     end
 
     private

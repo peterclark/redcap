@@ -1,107 +1,106 @@
-require 'hashie'
+module Redcapable
 
-module Redcap
-  class Record < Hashie::Mash
-    @@client = nil
-
-    def self.metadata
-      client.metadata
+  # extend the including class with ClassMethods
+  def self.included(klass)
+    klass.extend ClassMethods
+    # create attribute accessors for all redcap fields.
+    klass.class_eval do
+      fields = Redcap.new.fields
+      attr_accessor *(fields)
+      const_set :REDCAP_FIELDS, fields
+      def initialize hash={}
+        hash.each do |k,v|
+          instance_variable_set "@#{k}", v
+        end if hash && hash.is_a?(Hash)
+      end
     end
+  end
 
-    def self.find id
+  # instance methods
+  def id
+    record_id
+  end
+
+  def save
+    data = {}
+    self.class::REDCAP_FIELDS.each do |field|
+      data[field] = send(field.to_sym)
+    end
+    if record_id
+      client.update [data]
+    else
+      self.record_id = client.max_id + 1
+      result = client.create [data]
+      result.first == record_id.to_s
+    end
+  end
+
+  def client
+    self.class.client
+  end
+
+  # class methods
+  module ClassMethods
+    @client = nil
+
+    def find id
       return unless id.is_a? Integer
       response = client.records records: [id]
-      self.new response.first
+      new response.first
     end
 
-    def self.all
+    def all
       response = client.records
-      response.map { |r| self.new r }
+      response.map { |r| new r }
     end
 
-    def self.ids
+    def ids
       client.records(fields: [:record_id]).map { |r| r['record_id'].to_i }
     end
 
-    def self.count
+    def count
       ids.count
     end
 
-    def self.pluck field
+    def pluck field
       return [] unless field
       response = client.records fields: [field]
       response.map { |r| r[field.to_s] }
     end
 
-    def self.find_or_create_by condition
-    end
-
-    def self.having condition
-    end
-
-    def self.group field
-    end
-
-    def self.order condition
-    end
-
-    def self.where_not condition
-    end
-
-    def self.select *fields
+    def select *fields
       response = client.records fields: fields
-      response.map { |r| self.new r }
+      response.map { |r| new r }
     end
 
-    def self.where condition
+    def where condition
       comparison condition, '='
     end
 
-    def self.gt condition
+    def gt condition
       comparison condition, '>'
     end
 
-    def self.lt condition
+    def lt condition
       comparison condition, '<'
     end
 
-    def self.gte condition
+    def gte condition
       comparison condition, '>='
     end
 
-    def self.lte condition
+    def lte condition
       comparison condition, '<='
     end
 
-    def id
-      record_id
-    end
-
-    def save
-      if record_id
-        data = Hash[keys.zip(values)]
-        client.update [data]
-      else
-        max_id = client.records(fields: %w(record_id)).map(&:values).flatten.map(&:to_i).max
-        self.record_id = max_id.to_i + 1
-        data = Hash[keys.zip(values)]
-        result = client.create [data]
-        result.first == record_id.to_s
-      end
-    end
-
     def client
-      self.class.client
+      @client = Redcap.new unless @client
+      @client
     end
 
     private
 
-    def self.client
-      @@client = Redcap.new unless @@client
-      @@client
-    end
-
-    def self.comparison condition, op
+    def comparison condition, op
       raise "method only accepts a Hash" unless condition.is_a? Hash
       raise "method only accepts a Hash with one key/value pair" unless condition.size == 1
       key, val = condition.first
@@ -116,8 +115,7 @@ module Redcap
       else
         []
       end
-      response.map { |r| self.new r }
+      response.map { |r| new r }
     end
-
   end
 end
