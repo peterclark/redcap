@@ -4,6 +4,14 @@ module Redcap
   class Record < Hashie::Mash
     @@client = nil
 
+    def self.metadata
+      client.metadata
+    end
+
+    def self.fields
+      client.fields
+    end
+
     def self.find id
       return unless id.is_a? Integer
       response = client.records records: [id]
@@ -78,8 +86,7 @@ module Redcap
         data = Hash[keys.zip(values)]
         client.update [data]
       else
-        max_id = client.records(fields: %w(record_id)).map(&:values).flatten.map(&:to_i).max
-        self.record_id = max_id.to_i + 1
+        self.record_id = client.max_id + 1
         data = Hash[keys.zip(values)]
         result = client.create [data]
         result.first == record_id.to_s
