@@ -60,6 +60,16 @@ end
 bob = People.find 1
 ```
 
+###### Accessing Redcap fields
+`Redcap::Record` inherits from `Hashie::Mash` which allows access to your Redcap data fields via method and hash key like so:
+```ruby
+sarah = People.find 3
+sarah.last_name
+# => 'Johnson'
+sarah['last_name']
+# => 'Johnson'
+```
+
 ###### Find records using an array of ids
 ```ruby
 people = People.where id: [1,4,5]

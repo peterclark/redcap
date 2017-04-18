@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://redcap.sc-ctsi.org/api/
+    body:
+      encoding: US-ASCII
+      string: token=SECRET&format=json&content=record
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (darwin14.1.0 x86_64) ruby/2.2.1p85
+      Content-Length:
+      - '65'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - redcap.sc-ctsi.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 18 Apr 2017 00:37:05 GMT
+      Server:
+      - Apache/2.2.3 (Red Hat)
+      X-Powered-By:
+      - PHP/5.1.6
+      Expires:
+      - '0'
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - "*"
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '[{"record_id":"1","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"adeline.lyons@mailinator.com","first_name":"Ann","last_name":"Lyons","phone":"(307)
+        336-6873","address":"599 Momu Extension","address_2":"","city":"Oriwuplow","state":"NY","zipcode":"59727","height":"83","weight":"172","dob":"1987-03-28","veteran":"1","multiple_birth":"3","gender":"2","ethnicity":"1","race":"4","tobacco_use":"1","has_medical_conditions":"1","medical_conditions":"Chronic
+        rhinitis, Lateral epicondylitis","has_medications":"1","medications":"ALOMIDE,
+        AXIRON","travel_distance":"1","parent_studies":"1","additional":"Enicuvniv
+        egipef tudso miwgo aci hanad ek gori id bomregadi conetvo muda. Murir ceh
+        guzrem eku coc seib wazpume efomor fulezer monpobbaw tepu ara evjeuza odwiv
+        an oklulo laileru. Ve peba ko kepbebvaf jecofot ce da tik teel su wapdicup
+        batzewo seevarup ta kucewelog wabup. Wep fi la kil wiwul sefu loktenjad pukocu
+        okalas nejcuita zucufcow ti nog. Bopej juolo hibri hu gomak hucbagzu kucbafgoc
+        petdi riguac puoda liazu figsufuk bid ibi feuda. Jo ekegazup bebul asguslir
+        izoozu foan one mu ti etomis ipigokpok lehce.","usc_patient":"1","records_access":"0","media_channels___1":"0","media_channels___2":"1","media_channels___3":"0","media_channels___4":"0","media_channels___5":"0","media_channels___6":"0","media_channels___7":"0","media_channels___8":"0","media_channels___9":"1","media_channels___10":"0","info_available":"1","volunteer_complete":"0"},{"record_id":"2","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"blue.horse@mailinator.com","first_name":"Ella","last_name":"Kelley","phone":"975
+        600-8185","address":"372 Kasi Court","address_2":"","city":"Soimiuz","state":"VA","zipcode":"36268","height":"42","weight":"278","dob":"1936-04-04","veteran":"1","multiple_birth":"3","gender":"1","ethnicity":"1","race":"5","tobacco_use":"0","has_medical_conditions":"0","medical_conditions":"","has_medications":"0","medications":"","travel_distance":"1","parent_studies":"1","additional":"Zupu
+        coc uhfol mupdipi bakcazhi gatonulor napzi vocu kinveute lebokgas doljug daivfo.
+        Ihecumev inigaz uri kur gorir lob hel zehimefip enra dawili cebka bivi cozkuk
+        fejgumwa niiduoz atles barewco. Beccatwi goj sa pepiemo dam ahnonwal vu gejo
+        sed togicwo wirar itfo pumfepuh letfiska uc jorlek. Ladferga va vufu cowu
+        ugota vigubbi totomo cozribji iriki jidakir tefcile co baugzep heb itoce de
+        mar. Umuemuji oma ogozoza ulapiop wortotpu udofitso mepir riv et ciif fapwus
+        julol selemaz ju. Kubwajir cojive apaze lo uthus ukfu dak dude lazieva zunoci
+        pa bifozoiri edecac filza mutpe rafge. Zo ramkece fof haeledu rujvodo sedeek
+        pul patisu hopi uj poefuwi lac edati ozoc fopti fuohu attaju ur.","usc_patient":"1","records_access":"0","media_channels___1":"1","media_channels___2":"1","media_channels___3":"1","media_channels___4":"1","media_channels___5":"1","media_channels___6":"1","media_channels___7":"1","media_channels___8":"0","media_channels___9":"0","media_channels___10":"1","info_available":"1","volunteer_complete":"0"},{"record_id":"3","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"chase.glover@mailinator.com","first_name":"Chase","last_name":"Glover","phone":"643-875-2913","address":"1541
+        Dasohi Parkway","address_2":"","city":"Fusalesa","state":"AZ","zipcode":"08507","height":"80","weight":"247","dob":"1995-04-04","veteran":"1","multiple_birth":"1","gender":"1","ethnicity":"1","race":"7","tobacco_use":"1","has_medical_conditions":"0","medical_conditions":"","has_medications":"0","medications":"","travel_distance":"2","parent_studies":"1","additional":"Hugazri
+        temseghe punola mac ca cit aladis eko uka zojda ku mejoz gapvoz vu vuzrofbim
+        pa kitdazbi suril. Daukma vivribuh pa ajcecan zavi nosama dav uwizicgo bose
+        farel bu caffevmuf om do hofpu. Cojipza boj oki veepo fezum apwacde hi buzgoj
+        jawgih jug geskuhom rahoden ep. Uz rivi wehpahih huef lofuro rekavzis fiztof
+        nod fohauma en lu ridorho so zivarmis.","usc_patient":"0","records_access":"0","media_channels___1":"1","media_channels___2":"1","media_channels___3":"1","media_channels___4":"1","media_channels___5":"1","media_channels___6":"1","media_channels___7":"1","media_channels___8":"1","media_channels___9":"0","media_channels___10":"1","info_available":"0","volunteer_complete":"0"},{"record_id":"4","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"lulu.gonzales@mailinator.com","first_name":"Lulu","last_name":"Gonzales","phone":"772658-3419","address":"724
+        Hibdog Court","address_2":"","city":"Cojogme","state":"DC","zipcode":"50469","height":"79","weight":"141","dob":"1997-04-04","veteran":"0","multiple_birth":"1","gender":"2","ethnicity":"1","race":"4","tobacco_use":"0","has_medical_conditions":"0","medical_conditions":"","has_medications":"0","medications":"","travel_distance":"5","parent_studies":"1","additional":"Zebhaf
+        vep majvunu na web ojo kis ju ol izusu adheto mez vurus. Ig su vu muk vag
+        roupomig imagozzom hupokuho oma midfilfol fawki luuk zovinowu. Vo fehvod upiica
+        zajof dire midebge jip vu fu giw fevughuf uh te ipwat. Iziopa um bokta pem
+        zoh rof firiz tuw ebtow ek kufileh vulo ludpula uv fopekfo tazeto vabze. Dugom
+        kidkur wunguon ruf pop pudiwa ih dukhi cojafjag sewipmol hodabboh wohafpo
+        roowa.","usc_patient":"0","records_access":"0","media_channels___1":"1","media_channels___2":"1","media_channels___3":"1","media_channels___4":"1","media_channels___5":"1","media_channels___6":"1","media_channels___7":"1","media_channels___8":"1","media_channels___9":"0","media_channels___10":"1","info_available":"1","volunteer_complete":"0"},{"record_id":"5","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"lola.harvey@mailinator.com","first_name":"Lola","last_name":"Harvey","phone":"(661)
+        374-3315","address":"36 Semvo Avenue","address_2":"","city":"Sehcojjuw","state":"IL","zipcode":"87708","height":"50","weight":"226","dob":"2003-04-04","veteran":"1","multiple_birth":"1","gender":"3","ethnicity":"1","race":"1","tobacco_use":"0","has_medical_conditions":"0","medical_conditions":"","has_medications":"0","medications":"","travel_distance":"3","parent_studies":"1","additional":"Coliw
+        co un ga edtivza pa war riz menam misum hu el kiwkanret ba suitsiz ihaabdol
+        vugkiwel. Ri ca vujodto mejek be ujac su guva hugoifu jisozkov no wadokud
+        giviteg ahmu jimtec rujrerto holas wafbowuh. Terkomur sudmerefi kedsev pit
+        junoek jailiek zid cu saluppa bagzehil jodhe neitofo rimous wetosi digav zieci
+        lodmu dokodjo. Pu sekpugag igumodo kuffol zanu av afeje na gi ho sunremog
+        koz sooteoda. Ew zaw nupepso wefgi fuzahuf nohus ig socep vajcodnin umusih
+        ujdokuk jirorji wohca kebo zac vad. Hi mujemza loh mulu migajvi icuew tusi
+        zupi ug va poodhar cebo.","usc_patient":"1","records_access":"0","media_channels___1":"1","media_channels___2":"1","media_channels___3":"1","media_channels___4":"1","media_channels___5":"1","media_channels___6":"1","media_channels___7":"1","media_channels___8":"1","media_channels___9":"0","media_channels___10":"1","info_available":"0","volunteer_complete":"0"},{"record_id":"6","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"alta.bates@mailinator.com","first_name":"Alta","last_name":"Bates","phone":"(879)
+        456-9854","address":"655 Bizew Junction","address_2":"","city":"Joifvap","state":"UT","zipcode":"53177","height":"82","weight":"269","dob":"1974-04-05","veteran":"0","multiple_birth":"2","gender":"1","ethnicity":"1","race":"4","tobacco_use":"1","has_medical_conditions":"1","medical_conditions":"BCC,
+        Basal cell skin cancer, Cataract","has_medications":"1","medications":"ALLERHIST-1,
+        AMBIEN","travel_distance":"1","parent_studies":"1","additional":"Lec oto kuavfo
+        fi hej te tiwbimuz seze zimhi ipjuja akekorlom ewtetat larcif getzur ruhokmiv
+        dinwe. Iczinez tihipne debna gaanotu kemmuzo efenuheh isepapwom pun johjuer
+        jo ca lovub fezracruc ubilofa. Re rovir ki ugfutco zaz fom nupkironu juegfi
+        tori uc wohibde worful dek cokvi ha se nurelal. Ot taumipum jur vuanvu dawvubu
+        ume mip hakpoluv ukzu riapanaf jon tepaevo melnozwe. Bu pizadla po rijivzan
+        recesiet getnad wo itakitu mivu ju kag buvuj di anro osuwjeh ik.","usc_patient":"0","records_access":"0","media_channels___1":"1","media_channels___2":"0","media_channels___3":"0","media_channels___4":"0","media_channels___5":"0","media_channels___6":"0","media_channels___7":"0","media_channels___8":"0","media_channels___9":"0","media_channels___10":"0","info_available":"0","volunteer_complete":"0"}]'
+    http_version:
+  recorded_at: Tue, 18 Apr 2017 00:37:05 GMT
+recorded_with: VCR 3.0.3

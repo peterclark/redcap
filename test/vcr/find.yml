@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://redcap.sc-ctsi.org/api/
+    body:
+      encoding: US-ASCII
+      string: token=SECRET&format=json&content=record&records%5B0%5D=1
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.1 (darwin14.1.0 x86_64) ruby/2.2.1p85
+      Content-Length:
+      - '82'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - redcap.sc-ctsi.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 18 Apr 2017 00:34:46 GMT
+      Server:
+      - Apache/2.2.3 (Red Hat)
+      X-Powered-By:
+      - PHP/5.1.6
+      Expires:
+      - '0'
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '1474'
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '[{"record_id":"1","accept_terms":"1","registering_self":"1","at_least_18":"1","email":"adeline.lyons@mailinator.com","first_name":"Ann","last_name":"Lyons","phone":"(307)
+        336-6873","address":"599 Momu Extension","address_2":"","city":"Oriwuplow","state":"NY","zipcode":"59727","height":"83","weight":"172","dob":"1987-03-28","veteran":"1","multiple_birth":"3","gender":"2","ethnicity":"1","race":"4","tobacco_use":"1","has_medical_conditions":"1","medical_conditions":"Chronic
+        rhinitis, Lateral epicondylitis","has_medications":"1","medications":"ALOMIDE,
+        AXIRON","travel_distance":"1","parent_studies":"1","additional":"Enicuvniv
+        egipef tudso miwgo aci hanad ek gori id bomregadi conetvo muda. Murir ceh
+        guzrem eku coc seib wazpume efomor fulezer monpobbaw tepu ara evjeuza odwiv
+        an oklulo laileru. Ve peba ko kepbebvaf jecofot ce da tik teel su wapdicup
+        batzewo seevarup ta kucewelog wabup. Wep fi la kil wiwul sefu loktenjad pukocu
+        okalas nejcuita zucufcow ti nog. Bopej juolo hibri hu gomak hucbagzu kucbafgoc
+        petdi riguac puoda liazu figsufuk bid ibi feuda. Jo ekegazup bebul asguslir
+        izoozu foan one mu ti etomis ipigokpok lehce.","usc_patient":"1","records_access":"0","media_channels___1":"0","media_channels___2":"1","media_channels___3":"0","media_channels___4":"0","media_channels___5":"0","media_channels___6":"0","media_channels___7":"0","media_channels___8":"0","media_channels___9":"1","media_channels___10":"0","info_available":"1","volunteer_complete":"0"}]'
+    http_version:
+  recorded_at: Tue, 18 Apr 2017 00:34:46 GMT
+recorded_with: VCR 3.0.3
