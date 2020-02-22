@@ -23,6 +23,10 @@ module Redcap
       response.map { |r| self.new r }
     end
 
+    def self.delete_all ids
+      client.delete ids
+    end
+
     def self.ids
       client.records(fields: [:record_id]).map { |r| r['record_id'].to_i }
     end
@@ -91,6 +95,11 @@ module Redcap
         result = client.create [data]
         result.first == record_id.to_s
       end
+    end
+
+    def destroy
+      return unless record_id
+      client.delete [record_id]
     end
 
     def client

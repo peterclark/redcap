@@ -123,14 +123,22 @@ module Redcap
       post payload
     end
 
+    def delete ids
+      return unless ids.is_a?(Array) && ids.any?
+      payload = build_payload content: :record, records: ids, action: :delete
+      log flush_cache if ENV['REDCAP_CACHE']=='ON'
+      post payload
+    end
+
     private
 
-    def build_payload content: nil, records: [], fields: [], filter: nil
+    def build_payload content: nil, records: [], fields: [], filter: nil, action: nil
       payload = {
         token: configuration.token,
         format: configuration.format,
         content: content
       }
+      payload[:action] = action if action
       records.each_with_index do |record, index|
         payload["records[#{index}]"] = record
       end if records
