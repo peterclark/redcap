@@ -1,4 +1,4 @@
-# Redcap [![Build Status](https://travis-ci.org/peterclark/redcap.svg?branch=master)](https://travis-ci.org/peterclark/redcap) [![Code Climate](https://codeclimate.com/github/peterclark/redcap/badges/gpa.svg)](https://codeclimate.com/github/peterclark/redcap)
+# Redcap [![CI](https://github.com/peterclark/redcap/actions/workflows/ci.yml/badge.svg)](https://github.com/peterclark/redcap/actions/workflows/ci.yml)
 
 A Ruby gem for interacting with the REDCap API
 
@@ -185,7 +185,11 @@ Setting `REDCAP_CACHE` to `ON` inside your `.env` file will cache all calls to R
 
 ###### Force cache flush
 
-If `REDCAP_CACHE` is set to `ON`, the cache can be manually flushed by calling `flush_cache` on the client.
+The cache can be manually flushed by calling `flush_cache` on the client. It is always safe to call — when
+`REDCAP_CACHE` is not `ON`, it is a no-op.
+
+Note that `REDCAP_CACHE` is read when the gem is loaded, so it must be set before `require 'redcap'` and
+cannot be changed at runtime.
 
 ```ruby
 People.client.flush_cache
@@ -215,6 +219,36 @@ redcap.records fields: %w(email age), filter: '[age] < 35'
 redcap.records records: [1,4], fields: %w(email age), filter: '[age] < 35'
 ```
 
+###### Error handling
+
+Everything the gem raises descends from `Redcap::Error`:
+
+```ruby
+begin
+  People.all
+rescue Redcap::ConfigurationError    # host or token missing; raised before any request
+rescue Redcap::ResponseError => e    # non-2xx, transport failure, or a REDCap {"error": ...} body
+  e.status                           # => 403
+  e.body
+rescue Redcap::ParseError            # a 2xx response that wasn't JSON
+end
+```
+
+Requests time out after 60 seconds by default:
+
+```ruby
+Redcap.new host: '...', token: '...', timeout: 10, open_timeout: 5
+```
+
+## Limitations
+
+`Record` memoizes its client in a class variable, and class variables are shared with subclasses, so **all
+`Record` subclasses in a process share one client and one API token**. Despite the "name the class after your
+REDCap project" guidance above, a single process can only talk to one REDCap project. See `PLAN.md` (R1).
+
+Because `Record` inherits from `Hashie::Mash`, REDCap fields share a namespace with the record's own methods.
+A project with a field named `id`, `save`, or `count` will collide.
+
 ## TODO
 
 1. Method chaining
@@ -225,7 +259,7 @@ redcap.records records: [1,4], fields: %w(email age), filter: '[age] < 35'
 
 - `include Redcap`
 
-3. Destroy a record
+3. Per-subclass configuration, so one process can serve multiple REDCap projects
 
 ## Development
 
