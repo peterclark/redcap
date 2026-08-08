@@ -9,6 +9,29 @@ test.
 
 ---
 
+> ## Status
+>
+> **Phases 1–4 are implemented and released as `0.4.0`** — see `CHANGELOG.md`. The suite went from 24 to 115
+> examples; 56 of those fail against `4c1e46f` and all pass now, including a named regression test for each
+> defect below.
+>
+> **Refactoring proposals R1–R5 are open.** They change public behavior and are still deliberately separate.
+>
+> Two corrections to this document, made while implementing it:
+>
+> - The `bindir = "exe"` bullet under C12 was **wrong**. `bin/` for development scripts and `exe/` for shipped
+>   executables is the standard Bundler gem layout, and this gem ships no executables, so an empty
+>   `executables` list is the correct state. Pointing `bindir` at `bin/` would have installed `console` and
+>   `setup` onto users' PATH. Left as-is.
+> - The error model (R3) was pulled forward into Phase 4, because item 23 required error behavior to be
+>   defined before it could be tested. Timeouts came with it. Since that plus C10 makes the release
+>   behavior-breaking, it shipped as `0.4.0` rather than the `0.3.2` the table below anticipated.
+>
+> Also deviating from Phase 3 item 12: field names are validated against an identifier pattern rather than
+> against `Client#fields`, which would have cost a metadata round-trip on every query.
+
+---
+
 ## 1. Current state
 
 **Size.** 313 lines of library code across 4 files, 124 lines of tests across 4 files. Last substantive
